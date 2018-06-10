@@ -7,6 +7,34 @@
     <script src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
 </head>
 <body>
-test!!!!!!!!!!!!!!!!!
+<div class="container">
+    <div id="rateDiv" class="alert alert-secondary" role="alert">
+
+    </div>
+    <input type="text" class="form-control" id="valueDiv">
+    <button type="button" class="btn btn-dark" id="superButton"> Klikniej mnie </button>
+</div>
+
 </body>
 </html>
+
+<script>
+    $('#valueDiv').val('ala makota');
+
+    $("#superButton").click(function () {
+        var val = $("#valueDiv").val();
+        alert(val);
+    })
+
+    $.ajax({
+        type: "GET",
+        url:"http://api.nbp.pl/api/exchangerates/rates/A/USD/",
+        success: function (result) {
+            $('#rateDiv').append("<p>" + result.rates[0].mid + "</p>")
+        },
+        error: function (result) {
+            console.log(result);
+            alert(result.responseText);
+        }
+    })
+</script>
